@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Smart Complaint</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<div class="box">
+    <h2>Login</h2>
+
+    <form th:action="@{/api/auth/login}" method="post">
+
+        <!-- Email input -->
+        <input type="email" name="email" id="email" placeholder="Email"
+               th:value="${email != null} ? ${email} : ''" required>
+
+        <!-- Password input -->
+        <input type="password" name="password" id="password" placeholder="Password" required>
+
+        <!-- Submit button -->
+        <button type="submit">Login</button>
+
+        <!-- Display error or success message -->
+        <p th:if="${msg}" th:text="${msg}" style="color:red;"></p>
+
+    </form>
+
+    <p>New? <a th:href="@{/api/auth/register}">Register</a></p>
+
+</div>
+
+</body>
+</html>
