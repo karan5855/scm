@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Complaint System - Home</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+
+<header>
+    <div class="logo">Smart Complaint</div>
+<!--    <nav>-->
+<!--        <a th:href="@{/}">Home</a>-->
+<!--        <a th:href="@{/login}">Login</a>-->
+<!--        <a th:href="@{/api/auth/register}">Register</a>-->
+<!--    </nav>-->
+</header>
+
+<section class="hero">
+    <h1>Welcome to Smart Complaint Management System</h1>
+    <p>Fast. Easy. Secure Platform to Manage Complaints Effectively.</p>
+
+    <div class="btn-group">
+        <a th:href="@{/api/auth/login}" class="btn-primary">Login</a>
+        <a th:href="@{/api/auth/register}" class="btn-secondary">Register</a>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Smart Complaint System. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
+

@@ -1,33 +1,98 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Register - Smart Complaint</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="box">-->
+<!--    <h2>Register</h2>-->
+
+<!--    &lt;!&ndash; ✅ Form submits to controller &ndash;&gt;-->
+<!--    <form th:action="@{/api/auth/register}" method="post">-->
+
+<!--        <input type="text" name="name" placeholder="Name" required />-->
+
+<!--        <input type="email" name="email" placeholder="Email" required />-->
+
+<!--        <input type="password" name="password" placeholder="Password" required />-->
+
+<!--        <button type="submit">Register</button>-->
+
+<!--        &lt;!&ndash; ✅ Error / Success message &ndash;&gt;-->
+<!--        <p th:if="${msg != null}" th:text="${msg}" style="color:red;"></p>-->
+
+<!--    </form>-->
+
+<!--    <p>Already have account?-->
+<!--        <a th:href="@{/login}">Login</a>-->
+<!--    </p>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile responsive -->
     <title>Register - Smart Complaint</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
 
+<div class="topbar">
+    <span>Smart Complaint System</span>
+</div>
+
 <div class="box">
-    <h2>Register</h2>
+    <h2 style="text-align:center; margin-bottom:20px;">Create Account</h2>
 
-    <!-- ✅ Form submits to controller -->
-    <form th:action="@{/api/auth/register}" method="post">
+    <!-- Form to submit registration -->
+    <form th:action="@{/api/auth/register}" method="post" autocomplete="off">
 
-        <input type="text" name="name" placeholder="Name" required />
+        <!-- Name -->
+        <label for="name">Full Name</label>
+        <input type="text"
+               id="name"
+               name="name"
+               placeholder="Enter your full name"
+               required />
 
-        <input type="email" name="email" placeholder="Email" required />
+        <!-- Email -->
+        <label for="email">Email</label>
+        <input type="email"
+               id="email"
+               name="email"
+               placeholder="Enter your email"
+               required />
 
-        <input type="password" name="password" placeholder="Password" required />
+        <!-- Password -->
+        <label for="password">Password</label>
+        <input type="password"
+               id="password"
+               name="password"
+               placeholder="Enter password"
+               required />
 
+        <!-- Submit button -->
         <button type="submit">Register</button>
 
-        <!-- ✅ Error / Success message -->
-        <p th:if="${msg != null}" th:text="${msg}" style="color:red;"></p>
+        <!-- Error or success message -->
+        <p th:if="${msg != null}"
+           th:text="${msg}"
+           style="color:red; text-align:center; margin-top:10px;"></p>
 
     </form>
 
-    <p>Already have account?
-        <a th:href="@{/login}">Login</a>
+    <p style="text-align:center; margin-top:15px;">
+        Already have an account?
+        <a th:href="@{/login}" style="color:#1976d2; text-decoration:none;">
+            Login here
+        </a>
     </p>
 </div>
 

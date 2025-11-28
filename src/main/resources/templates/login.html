@@ -1,34 +1,90 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Login - Smart Complaint</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/styles.css}">-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="box">-->
+<!--    <h2>Login</h2>-->
+
+<!--    <form th:action="@{/api/auth/login}" method="post">-->
+
+<!--        &lt;!&ndash; Email input &ndash;&gt;-->
+<!--        <input type="email" name="email" id="email" placeholder="Email"-->
+<!--               th:value="${email != null} ? ${email} : ''" required>-->
+
+<!--        &lt;!&ndash; Password input &ndash;&gt;-->
+<!--        <input type="password" name="password" id="password" placeholder="Password" required>-->
+
+<!--        &lt;!&ndash; Submit button &ndash;&gt;-->
+<!--        <button type="submit">Login</button>-->
+
+<!--        &lt;!&ndash; Display error or success message &ndash;&gt;-->
+<!--        <p th:if="${msg}" th:text="${msg}" style="color:red;"></p>-->
+
+<!--    </form>-->
+
+<!--    <p>New? <a th:href="@{/api/auth/register}">Register</a></p>-->
+
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile Responsive -->
     <title>Login - Smart Complaint</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
 
+<div class="topbar">
+    <span>Smart Complaint System</span>
+</div>
+
 <div class="box">
-    <h2>Login</h2>
+    <h2 style="text-align:center; margin-bottom:20px;">Login</h2>
 
-    <form th:action="@{/api/auth/login}" method="post">
+    <form th:action="@{/api/auth/login}" method="post" autocomplete="off">
 
-        <!-- Email input -->
-        <input type="email" name="email" id="email" placeholder="Email"
-               th:value="${email != null} ? ${email} : ''" required>
+        <!-- Email -->
+        <label for="email">Email</label>
+        <input type="email"
+               name="email"
+               id="email"
+               placeholder="Enter your email"
+               th:value="${email != null} ? ${email} : ''"
+               required>
 
-        <!-- Password input -->
-        <input type="password" name="password" id="password" placeholder="Password" required>
+        <!-- Password -->
+        <label for="password">Password</label>
+        <input type="password"
+               name="password"
+               id="password"
+               placeholder="Enter your password"
+               required>
 
-        <!-- Submit button -->
+        <!-- Submit -->
         <button type="submit">Login</button>
 
-        <!-- Display error or success message -->
-        <p th:if="${msg}" th:text="${msg}" style="color:red;"></p>
-
+        <!-- Error / Success -->
+        <p th:if="${msg}"
+           th:text="${msg}"
+           style="color:red; text-align:center; margin-top:10px;"></p>
     </form>
 
-    <p>New? <a th:href="@{/api/auth/register}">Register</a></p>
-
+    <p style="text-align:center; margin-top:15px;">
+        New user?
+        <a th:href="@{/api/auth/register}" style="color:#1976d2; text-decoration:none;">
+            Register here
+        </a>
+    </p>
 </div>
 
 </body>

@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         // Public API/auth pages
-                        .requestMatchers("/api/auth/**", "/css/**", "/js/**", "/images/**")
+                        .requestMatchers("/api/auth/**", "/css/**", "/js/**", "/images/**", "/")
                         .permitAll()
                         // All other URLs require login
                         .anyRequest().authenticated()

@@ -57,7 +57,7 @@ public class AuthApiController {
         }
 
         // ✅ SUCCESS
-        return "redirect:/api/auth/register";
+        return "redirect:/";
     }
 
 
