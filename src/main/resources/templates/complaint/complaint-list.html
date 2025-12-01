@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>All Complaints</title>
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+  <!-- ======= INLINE PAGE CSS ======= -->
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+    }
+
+    body {
+        background: #f4f6fa;
+        padding: 40px 0;
+    }
+
+    .container {
+        width: min(1100px, 94%);
+        margin: auto;
+    }
+
+    .header-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+
+    h2 {
+        font-size: 26px;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: #fff;
+        padding: 10px 16px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .btn-primary:hover {
+        background: #1e50c7;
+    }
+
+    .btn-small {
+        background: #10b981;
+        padding: 6px 12px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: 0.2s;
+    }
+
+    .btn-small:hover {
+        background: #0d966c;
+    }
+
+    .table-wrapper {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+        color: #374151;
+    }
+
+    thead {
+        background: #eef2ff;
+    }
+
+    th {
+        padding: 12px;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 700px) {
+        .header-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            text-align: center;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Reusable Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+
+  <div class="header-row">
+    <h2>All Complaints</h2>
+    <a th:href="@{/complaints/create}" class="btn-primary">+ New Complaint</a>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>User</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="c : ${complaints}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.category}"></td>
+        <td th:text="${c.description}"></td>
+        <td th:text="${c.user.name}"></td>
+        <td>
+          <a th:href="@{/complaints/{id}(id=${c.id})}" class="btn-small">View</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

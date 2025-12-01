@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Complaints</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <style>
+        body {
+            background: #f4f7fc;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #cccccc;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e3c72;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #1e3c72;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background: #f3f3f3;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            background: #1e3c72;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            margin-top: 15px;
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ffdd57;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container">
+    <h2>User Complaint List</h2>
+
+    <!-- If no complaints -->
+    <p th:if="${complaints.size() == 0}" style="text-align:center; color:red;">
+        No complaints found for this user.
+    </p>
+
+    <!-- If complaints exist -->
+    <table th:if="${complaints.size() > 0}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="c : ${complaints}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.category}"></td>
+            <td th:text="${c.description}"></td>
+            <td>
+                <a th:href="@{'/complaints/' + ${c.id}}" class="btn">View</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="text-align:center;">
+        <a class="back-btn" th:href="@{/complaints/list}">Back to All Complaints</a>
+    </div>
+</div>
+
+</body>
+</html>

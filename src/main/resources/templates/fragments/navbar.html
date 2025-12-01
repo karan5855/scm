@@ -1,0 +1,13 @@
+<!-- 🌟 Reusable Navbar Fragment -->
+<nav class="navbar" th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="nav-left">
+        <a th:href="@{/}" class="logo">Smart Complaint</a>
+    </div>
+
+    <div class="nav-right">
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/complaints/list}">Complaints</a>
+        <a th:href="@{/complaints/create}">Create</a>
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+</nav>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Complaint</title>
+
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <!-- ========== Modern Inline CSS ========== -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: #f4f6fa;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .box {
+            width: min(500px, 100%);
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+            background: #f9fafb;
+        }
+
+        select:focus, textarea:focus {
+            border-color: #2563eb;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+        }
+
+        textarea {
+            height: 110px;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: #2563eb;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1f50c4;
+        }
+
+        .msg {
+            margin-top: 5px;
+            text-align: center;
+            color: #dc2626;
+            font-weight: 500;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="box">
+
+    <h2>Raise a Complaint</h2>
+
+    <form th:action="@{/complaints/create}" method="post" th:object="${complaint}">
+
+        <!-- Category -->
+        <select name="category" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="Water">Water</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Internet">Internet</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <!-- Description -->
+        <textarea name="description" placeholder="Describe the issue in detail..." required></textarea>
+
+        <!-- User -->
+        <select name="user.id" required>
+            <option value="" disabled selected>Select User</option>
+            <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}"></option>
+        </select>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit Complaint</button>
+
+        <!-- Success or Error Message -->
+        <p class="msg" th:if="${msg != null}" th:text="${msg}"></p>
+
+    </form>
+
+    <a th:href="@{/complaints/list}" class="back-link">← Back to Complaint List</a>
+
+</div>
+
+</body>
+</html>
