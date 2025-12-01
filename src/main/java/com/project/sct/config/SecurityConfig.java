@@ -1,39 +1,51 @@
 package com.project.sct.config;
 
+import com.project.sct.security.EmailPasswordAuthFilter;
+import com.project.sct.security.JwtAuthSuccessHandler;
+import com.project.sct.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-/**
- * Aama Badhi API Call Thai jase km kia Login Requird narthi aetle
- * aa delete kari de file config vali
- */
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final JwtAuthSuccessHandler successHandler;
+    private final JwtAuthenticationFilter jwtFilter;
+
+    public SecurityConfig(JwtAuthSuccessHandler successHandler, JwtAuthenticationFilter jwtFilter) {
+        this.successHandler = successHandler;
+        this.jwtFilter = jwtFilter;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
-                .csrf(AbstractHttpConfigurer::disable)
+        var emailFilter = new EmailPasswordAuthFilter();
+        emailFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
+        emailFilter.setAuthenticationSuccessHandler(successHandler);
 
+        http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-
-                        // Public API/auth pages
-                        .requestMatchers("/api/auth/**", "/css/**", "/js/**", "/images/**", "/")
-                        .permitAll()
-                        // All other URLs require login
+                        .requestMatchers("/auth/**", "/css/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                // disable basic auth
-                .httpBasic(AbstractHttpConfigurer::disable);
+                .addFilterAt(emailFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtFilter, EmailPasswordAuthFilter.class)
+                .formLogin(form -> form.loginPage("/auth/login").permitAll());
 
         return http.build();
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

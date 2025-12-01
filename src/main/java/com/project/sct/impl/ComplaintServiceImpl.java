@@ -10,30 +10,30 @@ import java.util.List;
 @Service
 public class ComplaintServiceImpl implements ComplaintService {
 
-    private final ComplaintRepository rep;
+    private final ComplaintRepository complaintRepository;
 
-    public ComplaintServiceImpl(ComplaintRepository rep) {
-        this.rep = rep;
+    public ComplaintServiceImpl(ComplaintRepository complaintRepository) {
+        this.complaintRepository = complaintRepository;
     }
 
     @Override
     public Complaint createComplaint(Complaint c) {
-        return rep.save(c);
+        return complaintRepository.save(c);
     }
 
     @Override
     public List<Complaint> listAll() {
-        return rep.findAll();
+        return complaintRepository.findAll();
     }
 
     @Override
     public List<Complaint> listByUser(Long userId) {
-        return rep.findByUserId(userId);
+        return complaintRepository.findByUserId(userId);
     }
 
     @Override
     public Complaint findById(Long id) {
-        return rep.findById(id).orElse(null);
+        return complaintRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -43,18 +43,18 @@ public class ComplaintServiceImpl implements ComplaintService {
             c.setStatus(status);
             if (dept != null)
                 c.setAssignedDepartment(dept);
-            rep.save(c);
+            complaintRepository.save(c);
         }
     }
 
     @Override
     public long countAll() {
-        return rep.count();
+        return complaintRepository.count();
     }
 
     @Override
     public long countByStatus(String status) {
-        List<Complaint> list = rep.findByStatus(status);
+        List<Complaint> list = complaintRepository.findByStatus(status);
         return list == null ? 0L : list.size();
     }
 }
