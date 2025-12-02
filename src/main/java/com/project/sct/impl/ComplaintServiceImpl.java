@@ -60,6 +60,6 @@ public class ComplaintServiceImpl implements ComplaintService {
 
     @Override
     public void delete(Long id) {
-        rep.deleteById(id);
+        complaintRepository.deleteById(id);
     }
 }
