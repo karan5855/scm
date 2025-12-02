@@ -12,4 +12,5 @@ public interface ComplaintService {
     void updateStatus(Long id, String status, String dept);
     long countAll();
     long countByStatus(String status);
+    void delete(Long id);
 }

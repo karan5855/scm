@@ -82,4 +82,10 @@ public class ComplaintApiController {
         return "complaint/complaint-detail";
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "redirect:/complaints/list";
+    }
+
 }

@@ -57,4 +57,9 @@ public class ComplaintServiceImpl implements ComplaintService {
         List<Complaint> list = rep.findByStatus(status);
         return list == null ? 0L : list.size();
     }
+
+    @Override
+    public void delete(Long id) {
+        rep.deleteById(id);
+    }
 }
