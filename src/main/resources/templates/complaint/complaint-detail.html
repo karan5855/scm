@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive -->
+    <title>Complaint Detail - Smart Complaint System</title>
+
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+
+    <style>
+
+        /* ===== Global Styles ===== */
+        body {
+            background: #eef2f7;
+            font-family: "Inter", sans-serif;
+            padding: 40px 0;
+        }
+
+        /* ===== Container Card ===== */
+        .card-container {
+            max-width: 750px;
+            margin: auto;
+            background: #fff;
+            padding: 35px 40px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== Title ===== */
+        .title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 25px;
+        }
+
+        /* ===== Detail Box ===== */
+        .detail-box {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            row-gap: 16px;
+            column-gap: 12px;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 16px;
+        }
+
+        .value {
+            color: #111827;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* ===== Back Button ===== */
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #1e4ac7;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 650px) {
+            .card-container {
+                padding: 25px;
+            }
+
+            .detail-box {
+                grid-template-columns: 1fr; /* Stack labels/values vertically */
+            }
+
+            .label {
+                margin-top: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Page Content -->
+<div class="card-container">
+
+    <h2 class="title">Complaint Details</h2>
+
+    <div class="detail-box">
+
+        <div class="label">Complaint ID:</div>
+        <div class="value" th:text="${complaint.id}"></div>
+
+        <div class="label">Category:</div>
+        <div class="value" th:text="${complaint.category}"></div>
+
+        <div class="label">Description:</div>
+        <div class="value" th:text="${complaint.description}"></div>
+
+        <div class="label">User Name:</div>
+        <div class="value" th:text="${complaint.user.name}"></div>
+
+        <div class="label">User Email:</div>
+        <div class="value" th:text="${complaint.user.email}"></div>
+
+        <div class="label">Status:</div>
+        <div class="value" th:text="${complaint.status}"></div>
+
+    </div>
+
+    <a th:href="@{/complaints/list}" class="back-btn">← Back to Complaints</a>
+
+</div>
+
+</body>
+</html>
